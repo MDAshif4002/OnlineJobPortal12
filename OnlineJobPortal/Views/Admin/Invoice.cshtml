@@ -1,0 +1,63 @@
+﻿ @* @model IEnumerable<OnlineJobPortal.Models.singleorder>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+}
+<table class="table table-boardered mydatatable2">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>PinCode</th>
+            <th>Addrese</th>
+            <th>Productname</th>
+            <th>Mode</th>
+            <th>Paymentstatus</th>
+
+            <th>amount</th>
+            <th>Transaction</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model)
+        {
+            <tr>
+                <td>@data.id</td>
+                <td>@data.name</td>
+                <td>@data.mobile</td>
+                <td>@data.email</td>
+                <td>@data.pincode</td>
+                <td>@data.address</td>
+                <td>@data.productname</td>
+                <td>@data.mode</td>
+
+                <td>@data.productprice</td>
+                <td>@data.transactionid</td>
+                <td>
+                    @if (data.paymentstatus == "success")
+                    {
+                        <span class="badge text-bg-success">Success</span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-warning">Pending</span>
+                    }
+                </td>
+
+                <td>
+                    <a class="btn btn-info" asp-action="" asp-route-id="@data.id">Invoice</a>
+                </td>
+
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+ *@@

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<OnlineJobPortal.Models.singleorder>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+}
+
+<h1> All Single Orders</h1>
+
+<table class="table table-bordered table-hover text-center  mydatatable2">
+
+    <thead>
+    <tr>
+        <th>Sr </th>
+        <th>Name </th>
+        <th>Mobile </th>
+        <th>Email </th>
+        <th>Pincode</th>
+        <th>Address</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Product ID</th>
+        <th>Mode</th>
+        <th>Payment Status</th>
+        <th>Txn ID </th>
+        <th>Invoice</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var data in Model)
+    {
+        <tr>
+            <td> @data.id </td>
+            <td> @data.name </td>
+            <td> @data.mobile </td>
+            <td> @data.email </td>
+            <td> @data.pincode </td>
+            <td> @data.address </td>
+            <td> @data.productname </td>
+            <td> @data.productprice </td>
+            <td> @data.productid </td>
+            <td> @data.mode </td>
+            <td> 
+                @if(data.paymentstatus=="success")
+                {
+                    <span class="badge text-bg-success">SUCCESS</span>
+                }
+                else
+                {
+                    <span class="badge text-bg-warning">PENDING</span>
+                }
+            
+            </td>
+            <td> @data.transactionid </td>
+            <td>
+                <a class="btn btn-primary" asp-action="InvoiceView" asp-route-id="@data.id" asp-controller="Admin">Invoice</a>
+            </td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>

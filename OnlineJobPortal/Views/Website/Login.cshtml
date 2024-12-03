@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+
+<h1>
+    Login Now
+</h1>
+<form method="post" asp-action="Login">
+    Enter Your Name
+    <input type="email" name="email" class="form-control" required />
+    <br />
+    Enter Your Password
+    <input type="password" name="password" class="form-control" required />
+    <br />
+    <button class="btn btn-primary">Login</button>
+    <br/>
+
+    <p class="text-danger">@TempData["msg"]</p>
+</form>

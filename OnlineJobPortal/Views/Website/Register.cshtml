@@ -1,0 +1,58 @@
+﻿@model OnlineJobPortal.Models.register
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<h1>Registration Form</h1> 
+
+<form method="post" asp-action="SaveRegister">
+    
+    Enter Your Name 
+    <input type="text" required name="name" class="form-control" />
+    <br />
+    Enter Your Email
+    <input type="email" required name="email" class="form-control" />
+    <br /> 
+    Enter Your Password
+    <input type="password" required name="password" class="form-control" />
+    <br />
+    Enter Your Mobile
+    <input type="number" required name="mobile" class="form-control" />
+    <br />
+    Enter Your Address
+    <input type="text" required name="address" class="form-control" />
+    <br />
+
+    <button class="btn btn-primary">Save</button>
+
+
+</form>
+
+
+@if(TempData["alert"]!=null)
+@if (TempData["alert"].ToString() == "registration_success")
+{
+    <script>
+        Swal.fire({
+        title: "Good job!",
+        text: "Regisration of @TempData["username"] is successfull!",
+        icon: "success"
+        });
+    </script>
+}
+
+
+@if(TempData["error"]!=null)
+{
+    <script>
+        Swal.fire({
+            title: "Failed!",
+            text: "@TempData["error"]",
+            icon: "error"
+        });
+    </script>
+}

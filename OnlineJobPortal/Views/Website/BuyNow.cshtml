@@ -1,0 +1,47 @@
+﻿@model OnlineJobPortal.Models.product
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<h1>Order Now</h1>
+<form method="post" asp-action="OrderNow"  >
+    Enter Your Name 
+    <input type="text" class="form-control" name="name" />
+    <br/>
+    Enter Your Mobile 
+    <input type="text" class="form-control" name="mobile" />
+    <br/>
+    Enter  Your Email 
+    <input type="text" class="form-control" name="email" />
+    <br/>
+    Enter Your Pincode 
+    <input type="text" class="form-control" name="pincode" />
+    <br/>
+    Enter Your Address 
+    <textarea name="address" class="form-control"></textarea>
+    <br/>
+
+    Product Name 
+    <input type="text" class="form-control" value="@Model.name" readonly />
+    <br/>
+    Product Price 
+    <input type="text" class="form-control" value="@Model.price" readonly />
+    <br/>
+
+    <input name="id" value="@Model.id" type="hidden" />
+
+    Select Payment Mode 
+    <input type="radio" value="cod" name="paymentmode" checked /> 
+    COD
+    <input type="radio" value="online" name="paymentmode" />
+    Online
+    
+    <br/><Br/>
+    <button class="btn btn-primary">Order Now </button>
+
+
+</form>

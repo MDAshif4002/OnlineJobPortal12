@@ -1,0 +1,68 @@
+﻿@model OnlineJobPortal.Models.cartinvoice
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+}
+
+<br /><br />
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 border">
+        <h3 class="text-center">Tax Invoice</h3>
+        <div class="row">
+            <div class="col-sm-6">
+                Billing Details : <br />
+                @Model.checkout.name,<br />
+                @Model.checkout.city,@Model.checkout.pincode<br />
+                @Model.checkout.email<br />
+                @Model.checkout.mobile
+            </div>
+            <div class="col-sm-6">
+                Invoice Details : <br />
+                Payment Status : @Model.checkout.paymentstatus<br />
+                Payment Mode : @Model.checkout.mode<br />
+                Txn ID : @Model.checkout.transactionid<br />
+            </div>
+        </div>
+        <hr />
+        <h4>Items in this orders :- </h4>
+        <table class="table table-bordered table-hover text-center">
+            <thead>
+                <tr>
+                    <th>Sr</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int sr = 1;
+                }
+                @foreach(var data in Model.cartpage)
+                {
+                    <tr>
+                        <td>@sr</td>
+                        <td>
+                            <img src="~/product/@data.productimage" style="height:80px;" /><br />
+                            @data.productname
+                        </td>
+                        <td>@data.qty</td>
+                        <td>@data.price</td>
+                        <td>@(Convert.ToInt16(data.qty) * Convert.ToInt16(data.price))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
+        <div class="row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3">
+                <h6 class="text-center">Total Amount</h6>
+                <h5 class="text-center">Rs. @ViewBag.totalamount</h5>
+            </div>
+    </div>
+</div>

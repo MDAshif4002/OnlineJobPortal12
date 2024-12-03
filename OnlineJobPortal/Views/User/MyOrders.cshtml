@@ -1,0 +1,65 @@
+﻿@model IEnumerable<OnlineJobPortal.Models.cartpage>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<h1>Your Cart</h1>
+<br />
+<table class="table table-bordered table-hover text-center">
+
+    <thead>
+        <tr>
+            <th>Sr</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>SubTotal</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            int sr = 1;
+        }
+        @foreach (var data in Model)
+        {
+            <tr>
+                <td>@sr</td>
+                <td>
+                    <img src="~/product/@data.productimage" style="height:80px;" /><br />
+                    @data.productname
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a class="btn btn-danger" asp-action="CartMinus" asp-route-id="@data.cartid">-</a>
+                        <button type="button" class="btn btn-default">@data.qty</button>
+                        <a class="btn btn-success" asp-action="CartPlus" asp-route-id="@data.cartid">+</a>
+                    </div>
+                </td>
+                <td>@data.price</td>
+                <td>@data.subtotal</td>
+                <td>
+                    <a class="btn btn-danger" asp-action="DeleteCart" asp-route-id="@data.cartid">Delete</a>
+                </td>
+            </tr>
+            sr++;
+        }
+    </tbody>
+
+</table>
+
+<hr />
+<div class="row">
+    <div class="col-sm-10"></div>
+    <div class="col-sm-2">
+        Total Amount : @ViewBag.totalamount Rs.
+        <br /><br />
+        <a class="btn btn-primary" asp-action="Checkout">Checkout Now</a>
+        <br />
+    </div>
+</div>

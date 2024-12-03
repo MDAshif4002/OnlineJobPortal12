@@ -1,0 +1,72 @@
+﻿@model OnlineJobPortal.Models.singleorder
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 " style="height:50px"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 bg-dark"></div>
+        <div class="col-sm-4"><h1>INVOICE</h1></div>
+        <div class="col-sm-4">
+            <h3>Really Great Company</h3>
+            <h5>Your Bussiness Partner</h5>
+        </div>
+
+        <div class="col-sm-2 bg-dark"></div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+            INVOICE TO:<br />
+            <b>@Model.name</b><br />
+            <b>Mobile No : </b> @Model.mobile<br />
+            <b>Email : </b> @Model.email<br />
+            <b>Address : </b> @Model.address
+
+        </div>
+        <div class="col-sm-6 text-end">
+            Total DUE<br />
+            <b>Amount : </b> @Model.productprice<br />
+            <b>Payment Status : </b> @Model.paymentstatus<br />
+            <b>Date : </b> @DateTime.Now.ToString("f")
+
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <th class="bg-dark text-light">PRODUCTS</th>
+            <th class="bg-dark text-light">QTY</th>
+            <th class="bg-dark text-light">PRICE</th>
+            <th class="bg-dark text-light">TOTAL</th>
+        </tr>
+        <tr>
+            <td>@Model.productname</td>
+            <td>1</td>
+            <td>@Model.productprice</td>
+            <td>Rs @Model.productprice</td>
+        </tr>
+    </table>
+    <h5>Payment Method:</h5>
+    Bank Name:<br />
+    Bank Account:
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Thanks You for purchase!</h3>
+        </div>
+        <div class="col-sm-6 text-center">
+            <h3>Drew Fieg<hr /></h3>
+            <p>Administrator</p>
+        </div>
+
+    </div>
+     <button class="btn btn-info" onclick="window.print()">Print</button>
+</div>

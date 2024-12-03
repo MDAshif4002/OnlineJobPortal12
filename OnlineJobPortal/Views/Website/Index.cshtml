@@ -1,0 +1,155 @@
+﻿@model OnlineJobPortal.Models.HomePage
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+
+@section head {
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
+}
+
+@section categories {
+
+    @foreach(var data in Model.category)
+    {
+        <li><a class="dropdown-item" asp-action="Products" asp-route-id="@data.id" > @data.title </a></li>
+    }
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
+            
+            <div class="carousel-indicators">
+
+                @{
+                    int b = 0;
+                }
+                @foreach(var x in Model.slider)
+                {
+                    @if(b==0)
+                    {
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@b" class="active"  ></button>
+                    }
+                    else
+                    {
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@b" ></button>
+                    }
+                    b++;
+                }
+
+            </div>
+
+            <div class="carousel-inner">
+                
+                @{
+                    int a = 1; 
+                }
+                @foreach (var x in Model.slider)
+                {
+                    @if(a==1)
+                    {
+                        <div class="carousel-item active">
+                            <img src="~/slider/@x.image" class="d-block w-100" alt="..." style="height: 400px;">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="carousel-item">
+                            <img src="~/slider/@x.image" class="d-block w-100" alt="..." style="height: 400px;">
+                        </div>
+                    }
+
+                    a++;
+                }   
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    
+        @foreach (var data in Model.category)
+        {
+
+            <div class="col-sm-2 shadow-lg text-center p-0" style="background-image: url('./category/@data.picture') " >
+
+                <div class="w-100 p-3" style="background: rgba(255,255,255, 0.5) ">
+
+                    <img src="~/category/@data.picture" class="shadow" style="height: 100px; width: 100px; border-radius: 50%;" />
+                    <br/>
+                    <h4> @data.title </h4>
+                    <p> @data.description </p>
+
+                </div>
+
+            </div>
+        }
+
+</div>
+
+<div class="row">
+
+    <div class="owl-carousel">
+
+        @foreach (var data in Model.category)
+        {
+
+            <div class="shadow-lg text-center p-3">
+                <img src="~/category/@data.picture" class="shadow" style="height: 100px; width: 100px; border-radius: 50%;" />
+                <br />
+                <h4> @data.title </h4>
+                <p> @data.description </p>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+
+
+
+@section script {
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="~/js/owl.carousel.min.js" ></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var owl = $('.owl-carousel');
+            owl.owlCarousel({
+                items: 4,
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 1000,
+                autoplayHoverPause: true
+            });
+        
+        } );
+    </script>
+
+}

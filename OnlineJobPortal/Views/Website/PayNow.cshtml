@@ -1,0 +1,98 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@*
+Name : @TempData["name"]
+<br/>
+Mobile : @TempData["mobile"]
+<br/>
+Email : @TempData["email"]
+<br/>
+Amount : @TempData["amount"]
+<br/>
+Order ID : @TempData["orderid"]
+*@
+
+<html>
+    <head>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    </head>
+    <body>
+
+    <script>
+
+        $(document).ready(function () {
+
+            var amt = @TempData["amount"]
+
+                $.ajax({
+                    url: "https://phpcrud.himanshukashyap.com/rzp/createOrder.php?mode=test&amount=" + amt,
+                    type: "get",
+                    error: function () {
+                        alert("Error in Ajax");
+                    },
+                    success: function (data) {
+
+                        var token = data.token;
+                        var key = data.key;
+
+                        // Configure all parameters for payment
+                        var options = {
+                            "key": key,
+                            "amount": amt * 100,
+                            "currency": "INR",
+                            "name": "DigiCoders Technologies",
+                            "description": "Test Transaction",
+                            "image": "https://phpcrud.himanshukashyap.com/rzp/logo.jpg",
+                            "order_id": token,
+                            "prefill": {
+                                "name": '@TempData["name"]',
+                                "email": '@TempData["email"]',
+                                "contact": '@TempData["mobile"]' 
+                            },
+                            "notes": {
+                                "address": "DigiCoders Technologies Private Limited, Lucknow, UP"
+                            },
+                            "theme": {
+                                "color": "#3399cc"
+                            },
+
+                            // Handle Success Response
+                            "handler": function (response) {
+                                var txnid = response.razorpay_payment_id;
+                                var orderid = @TempData["orderid"];
+
+                                window.location.href = "/Website/PaymentSuccess?txnid="+txnid+"&orderid="+orderid;                    
+                            }
+                        };
+
+                        // Initialize Razorpay SDK
+                        var rzp1 = new Razorpay(options);
+
+                        // Open Razorpay
+                        rzp1.open();
+
+
+                        // Handle Payment Fail Response
+                        rzp1.on('payment.failed', function (response) {
+                            window.location.href = "/Website/PaymentFailed";
+                        });
+
+
+
+                    }
+                });
+
+
+        });
+
+    </script>
+
+    </body>
+</html>

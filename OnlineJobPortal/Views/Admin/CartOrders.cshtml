@@ -1,0 +1,50 @@
+﻿@model IEnumerable<OnlineJobPortal.Models.checkout>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<h1>
+    Cart Order
+</h1>
+
+<table class="table table-bordered table-hover text-center">
+    <thead>
+        <tr>
+            <td>Sr</td>
+            <td>Name</td>
+            <td>Mobile</td>
+            <td>Email</td>
+            <td>Address</td>
+            <td>Mode</td>
+            <td>Payment Status</td>
+            <td>Txn ID</td>
+            <td>Invoice</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int sr = 1;
+        }
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@sr</td>
+                <td>@item.name</td>
+                <td>@item.mobile</td>
+                <td>@item.email</td>
+                <td>@item.address, @item.city, @item.pincode</td>
+                <td>@item.mode</td>
+                <td>@item.paymentstatus</td>
+                <td>@item.transactionid</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="CartInvoice" asp-route-id="@item.id">Invoice</a>
+                </td>
+            </tr>
+            sr++;
+        }
+    </tbody>
+</table>
